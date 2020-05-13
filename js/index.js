@@ -1,23 +1,9 @@
-import { removeBook } from './logic.js';
+import { Book, removeBook, addBookToLibrary } from './logic.js';
 
 // let newLibrary = [...myLibrary];
 let myLibrary = [
-  {
-    id: 1,
-    title: 'Game Of Thrones',
-    description: 'A nice book',
-    numberOfPages: 100,
-    read: false,
-    image: 'https://m.media-amazon.com/images/I/51GlEGbfXQL._SY346_.jpg',
-  },
-  {
-    id: 2,
-    title: 'The Witcher',
-    description: 'A nice book',
-    numberOfPages: 150,
-    read: false,
-    image: 'https://m.media-amazon.com/images/I/51GlEGbfXQL._SY346_.jpg',
-  },
+  new Book(1, 'Game Of Thrones', 'A nice book', 100, false, 'https://m.media-amazon.com/images/I/51GlEGbfXQL._SY346_.jpg'),
+  new Book(2, 'The Witcher', 'A nice book', 150, false, 'https://m.media-amazon.com/images/I/51GlEGbfXQL._SY346_.jpg'),
 ];
 //--------------
 
@@ -62,4 +48,3 @@ if (document.querySelector('#new-book')) {
     console.log(e);
   });
 }
-
