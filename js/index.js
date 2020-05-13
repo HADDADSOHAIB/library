@@ -65,16 +65,18 @@ Array.from(document.querySelectorAll('.update-status')).map(el => {
 if (document.querySelector('#new-book')) {
   document.querySelector('#new-book').addEventListener('click', (e) => {
     e.preventDefault();
-    const title = document.querySelector('#title').value;
-    const image = document.querySelector('#image').value;
-    const description = document.querySelector('#description').value;
-    const author = document.querySelector('#author').value;
-    const numPages = document.querySelector('#numpages').value;
-    const read = document.querySelector('#read').checked;
-    const book = new Book(myLibrary[0].id + 1, title, description, author, numPages, read, image);
-    myLibrary = addBookToLibrary(book, myLibrary);
-    window.localStorage.setItem('myLibrary', JSON.stringify(myLibrary));
-    window.location.assign('/');
+    if (document.querySelector('#new-book-info').checkValidity()) {
+      const title = document.querySelector('#title').value;
+      const image = document.querySelector('#image').value;
+      const description = document.querySelector('#description').value;
+      const author = document.querySelector('#author').value;
+      const numPages = document.querySelector('#numpages').value;
+      const read = document.querySelector('#read').checked;
+      const book = new Book(myLibrary[0].id + 1, title, description, author, numPages, read, image);
+      myLibrary = addBookToLibrary(book, myLibrary);
+      window.localStorage.setItem('myLibrary', JSON.stringify(myLibrary));
+      window.location.assign('/');
+    }
   });
 }
 
