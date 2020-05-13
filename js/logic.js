@@ -1,5 +1,5 @@
 /* eslint-disable no-unused-vars, func-names */
-function Book(id, title, description, numberOfPages, author, read, image) {
+function Book(id, title, description, author, numberOfPages, read, image) {
   this.id = id;
   this.title = title;
   this.description = description;
