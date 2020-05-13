@@ -1,11 +1,14 @@
 import { Book, removeBook, addBookToLibrary } from './logic.js';
 
-// let newLibrary = [...myLibrary];
-let myLibrary = [
-  new Book(1, 'Game Of Thrones', 'A nice book', 100, false, 'https://m.media-amazon.com/images/I/51GlEGbfXQL._SY346_.jpg'),
-  new Book(2, 'The Witcher', 'A nice book', 150, false, 'https://m.media-amazon.com/images/I/51GlEGbfXQL._SY346_.jpg'),
+let myLibrary = JSON.parse(window.localStorage.getItem('myLibrary'));
+
+if(!myLibrary){
+myLibrary = [
+  new Book(2, 'Game Of Thrones', 'A nice book', 100, false, 'https://m.media-amazon.com/images/I/51GlEGbfXQL._SY346_.jpg'),
+  new Book(1, 'The Witcher', 'A nice book', 150, false, 'https://m.media-amazon.com/images/I/51GlEGbfXQL._SY346_.jpg'),
 ];
-//--------------
+window.localStorage.setItem('myLibrary', JSON.stringify(myLibrary));
+}
 
 const book = ({
   id, title, description, numberOfPages, read, image
@@ -18,7 +21,7 @@ const book = ({
         <p class="card-text">${description}</p>
         <small>Pages: ${numberOfPages}</small>
         <small>${read ? 'Already read' : 'not read yet'}</small>
-        <button>Change read status</button>
+        <button data-id='${id}' class='update-status' id='status-update'>Change read status</button>
         <button data-id='${id}' class='remove-book'>Remove book</button>
       </div>
     </div>
@@ -36,15 +39,35 @@ Array.from(document.querySelectorAll('.remove-book')).map(el => {
   el.addEventListener('click', function () {
     const { id } = this.dataset;
     myLibrary = removeBook(id, myLibrary);
+    window.localStorage.setItem('myLibrary', JSON.stringify(myLibrary));
     if (document.querySelector(`#book-${id}`)) {
       document.querySelector(`#book-${id}`).parentElement.removeChild(document.querySelector(`#book-${id}`));
     }
   });
 });
 
+Array.from(document.querySelectorAll('.update-status')).map(el => {
+  el.addEventListener('click', function (){ 
+    const { id } = this.dataset;
+    const index = myLibrary.findIndex((ele) => ele.id == id);
+    myLibrary[index].read = !myLibrary[index].read;
+    window.localStorage.setItem('myLibrary', JSON.stringify(myLibrary));
+    window.location.assign('/');
+  });
+});
+
 if (document.querySelector('#new-book')) {
   document.querySelector('#new-book').addEventListener('click', (e) => {
     e.preventDefault();
-    console.log(e);
+    let title = document.querySelector('#title').value;
+    let image = document.querySelector('#image').value;
+    let description = document.querySelector('#description').value;
+    let author = document.querySelector('#author').value;
+    let numPages = document.querySelector('#numpages').value;
+    let read = document.querySelector('#read').checked;
+    let book = new Book(myLibrary[0].id+1, title, description, numPages, read, image);
+    myLibrary = addBookToLibrary(book, myLibrary);
+    window.localStorage.setItem('myLibrary', JSON.stringify(myLibrary));
+    window.location.assign('/');
   });
 }

@@ -8,6 +8,10 @@ function Book(id, title, description, numberOfPages, read, image) {
   this.image = image;
 }
 
+Book.prototype.updateStatus = function() { 
+	this.read = !this.read;
+}
+
 function removeBook(id, library) {
   const index = library.findIndex((ele) => ele.id == id);
   return [...library.slice(0, index), ...library.slice(index + 1)];
