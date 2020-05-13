@@ -1,7 +1,7 @@
 import { myLibrary } from './logic.js';
 
-const book = ({title, description, numberOfPages, read, image}) => `
-  <div class="col mb-4">
+const book = ({id, title, description, numberOfPages, read, image}) => `
+  <div id='book' class="col mb-4">
     <div class="card h-100">
       <img src="${image}" class="card-img-top" alt="image of book">
       <div class="card-body">
@@ -9,12 +9,22 @@ const book = ({title, description, numberOfPages, read, image}) => `
         <p class="card-text">${description}</p>
         <small>Pages: ${numberOfPages}</small>
         <small>${read ? 'Already read' : 'not read yet'}</small>
+        <button>Change read status</button>
+        <button data-id='${id}' class='remove-book'>Remove book</button>
       </div>
     </div>
   </div>`;
 
+document.querySelectorAll('.remove-book').map(element => {
+  element.addEventListener('click', (event) => {
+    
+  })
+});
+
 const render = () => {
   myLibrary.map(el => document.querySelector('#shelf').insertAdjacentHTML('afterbegin', book(el)));
 };
+
+
 
 render();
