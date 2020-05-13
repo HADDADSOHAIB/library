@@ -15,11 +15,7 @@ const book = ({id, title, description, numberOfPages, read, image}) => `
     </div>
   </div>`;
 
-document.querySelectorAll('.remove-book').map(element => {
-  element.addEventListener('click', (event) => {
-    
-  })
-});
+document.querySelectorAll('.remove-book');
 
 const render = () => {
   myLibrary.map(el => document.querySelector('#shelf').insertAdjacentHTML('afterbegin', book(el)));
