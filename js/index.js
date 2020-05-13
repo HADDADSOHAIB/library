@@ -21,7 +21,9 @@ let myLibrary = [
 ];
 //--------------
 
-const book = ({id, title, description, numberOfPages, read, image}) => `
+const book = ({
+  id, title, description, numberOfPages, read, image
+}) => `
   <div id='book-${id}' class="col mb-4">
     <div class="card h-100">
       <img src="${image}" class="card-img-top" alt="image of book">
@@ -40,12 +42,24 @@ const render = () => {
   myLibrary.map(el => document.querySelector('#shelf').insertAdjacentHTML('afterbegin', book(el)));
 };
 
-render();
+if (document.querySelector('#shelf')) {
+  render();
+}
 
 Array.from(document.querySelectorAll('.remove-book')).map(el => {
   el.addEventListener('click', function () {
     const { id } = this.dataset;
     myLibrary = removeBook(id, myLibrary);
-    document.querySelector(`#book-${id}`).parentElement.removeChild(document.querySelector(`#book-${id}`));
+    if (document.querySelector(`#book-${id}`)) {
+      document.querySelector(`#book-${id}`).parentElement.removeChild(document.querySelector(`#book-${id}`));
+    }
   });
 });
+
+if (document.querySelector('#new-book')) {
+  document.querySelector('#new-book').addEventListener('click', (e) => {
+    e.preventDefault();
+    console.log(e);
+  });
+}
+
