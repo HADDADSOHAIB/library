@@ -72,7 +72,8 @@ if (document.querySelector('#new-book')) {
       const author = document.querySelector('#author').value;
       const numPages = document.querySelector('#numpages').value;
       const read = document.querySelector('#read').checked;
-      const book = new Book(myLibrary[0].id + 1, title, description, author, numPages, read, image);
+      const nextId = myLibrary.length >= 1 ? myLibrary[0].id + 1 : 1;
+      const book = new Book(nextId, title, description, author, numPages, read, image);
       myLibrary = addBookToLibrary(book, myLibrary);
       window.localStorage.setItem('myLibrary', JSON.stringify(myLibrary));
       window.location.assign('/');

@@ -15,7 +15,7 @@ after that you need to run the bundler
 * `$ npm install`
 
 and open your files with live server or similar
-
+For more informations about Live server : [Live server](https://marketplace.visualstudio.com/items?itemName=ritwickdey.LiveServer/)
 
 ## Built With
 
