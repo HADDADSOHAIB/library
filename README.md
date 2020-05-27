@@ -1,6 +1,6 @@
 # Library
 
-This project is a simple library in the browser, you can add, remove and change status.
+This project is a simple library in the browser, you can add, remove and change status of your books.
 
 ## Live demo
 
